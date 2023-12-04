@@ -1,6 +1,6 @@
 import React from 'react'
 import { ArrowContainer, Container, Subtitle, Title } from './styles'
-import ArrowSvg from '@components/Arrow'
+import ArrowSvg from '@icons/Arrow'
 
 export default function PercentCard() {
   return (

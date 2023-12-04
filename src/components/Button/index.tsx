@@ -1,10 +1,19 @@
 import React from 'react'
-import { Container, Text } from './styles'
+import { ButtonTypeStyleProps, ButtonVariantProps, Container, Content, Text } from './styles'
+import Plus from '@icons/Plus'
 
-export default function Button() {
+interface Props {
+  variant: ButtonVariantProps
+  type: ButtonTypeStyleProps
+}
+
+export default function Button({ variant, type, ...rest }: Props) {
   return (
-    <Container type='FULL' variant='outlined'>
-      <Text variant='outlined'>Nova refeição</Text>
+    <Container {...rest} type={type} variant={variant}>
+      <Content>
+        <Plus />
+        <Text variant={variant}>Nova refeição</Text>
+      </Content>
     </Container>
   )
 }
