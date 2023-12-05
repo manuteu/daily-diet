@@ -1,10 +1,10 @@
 import React from 'react'
-import { ButtonTypeStyleProps, ButtonVariantProps, Container, Content, Text } from './styles'
+import { TypeColorProps, ButtonVariantProps, Container, Content, Text } from './styles'
 import Plus from '@icons/Plus'
 
 interface Props {
   variant: ButtonVariantProps
-  type: ButtonTypeStyleProps
+  type: TypeColorProps
 }
 
 export default function Button({ variant, type, ...rest }: Props) {

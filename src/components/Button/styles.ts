@@ -1,11 +1,11 @@
 import styled, { css } from 'styled-components/native';
 import { TouchableOpacity, Text as TextNative } from 'react-native';
 
-export type ButtonTypeStyleProps = 'FULL' | 'FIT';
+export type TypeColorProps = 'FULL' | 'FIT';
 export type ButtonVariantProps = 'contained' | 'outlined'
 
 type Props = {
-  type?: ButtonTypeStyleProps;
+  type?: TypeColorProps;
   variant: ButtonVariantProps;
 };
 

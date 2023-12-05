@@ -1,10 +1,10 @@
 import { TouchableOpacity } from 'react-native';
 import styled, { css } from 'styled-components/native';
 
-export type ButtonTypeStyleProps = 'INSIDE' | 'OUTSIDE';
+export type TypeColorProps = 'INSIDE' | 'OUTSIDE';
 
 type Props = {
-  type: ButtonTypeStyleProps;
+  type: TypeColorProps;
 };
 
 export const Container = styled(TouchableOpacity)<Props>`
