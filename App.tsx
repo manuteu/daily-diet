@@ -5,6 +5,7 @@ import Loading from '@components/Loading';
 import theme from './src/theme';
 import Home from '@screens/Home';
 import Resume from '@screens/Resume';
+import NewFood from '@screens/NewFood';
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Nunito_400Regular, Nunito_700Bold });
@@ -15,7 +16,7 @@ export default function App() {
         translucent
         backgroundColor="transparent"
       />
-      {fontsLoaded ? <Resume /> : <Loading />}
+      {fontsLoaded ? <NewFood /> : <Loading />}
     </ThemeProvider>
   );
 }
