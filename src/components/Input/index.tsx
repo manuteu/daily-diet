@@ -1,12 +1,20 @@
-import { View, Text } from 'react-native'
+import { View, Text, TextInputProps, TextInput } from 'react-native'
 import React from 'react'
-import { Form, Label } from './styles'
+import { Form, Input, Label } from './styles'
+import { TypeMask } from '@utils/index';
 
-export default function Input() {
+type Props = TextInputProps & {
+  inputRef?: React.RefObject<TextInput>;
+  label: string;
+  mask?: TypeMask;
+  width?: number;
+}
+
+export default function InputContainer({ inputRef, label, width = 100, ...rest }: Props) {
   return (
-    <Form>
-      <Label>Nome</Label>
-      <Input />
+    <Form width={width}>
+      <Label>{label}</Label>
+      <Input {...rest} />
     </Form>
   )
 }

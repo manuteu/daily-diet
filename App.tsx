@@ -1,5 +1,6 @@
 import { StatusBar } from 'react-native';
-import { useFonts, Nunito_400Regular, Nunito_700Bold } from '@expo-google-fonts/nunito';
+import { Nunito_400Regular, Nunito_700Bold } from '@expo-google-fonts/nunito';
+import { useFonts } from 'expo-font';
 import { ThemeProvider } from 'styled-components/native';
 import Loading from '@components/Loading';
 import theme from './src/theme';
