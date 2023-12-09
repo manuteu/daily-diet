@@ -1,4 +1,4 @@
-import { View, Text } from 'react-native'
+import { TouchableOpacityProps } from 'react-native'
 import React from 'react'
 import { Container, DateText } from './styles'
 import FoodCard from '@components/FoodCard'
@@ -9,17 +9,17 @@ export type Foods = {
   type: 'IN' | 'OUT';
 }
 
-export interface DailyFoodsProps {
+export type DailyFoodsProps = TouchableOpacityProps & {
   date: string;
   foods: Foods[]
 }
 
-export default function DailyFoods({ date, foods }: DailyFoodsProps) {
+export default function DailyFoods({ date, foods, ...rest }: DailyFoodsProps) {
   return (
     <Container>
       <DateText>{date}</DateText>
       {foods.map((food, index) => (
-        <FoodCard key={index} {...food} />
+        <FoodCard key={index} {...food} {...rest} />
       ))}
     </Container>
   )

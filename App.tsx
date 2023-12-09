@@ -4,9 +4,7 @@ import { useFonts } from 'expo-font';
 import { ThemeProvider } from 'styled-components/native';
 import Loading from '@components/Loading';
 import theme from './src/theme';
-import Home from '@screens/Home';
-import Resume from '@screens/Resume';
-import NewFood from '@screens/NewFood';
+import { Routes } from '@routes/index';
 
 export default function App() {
   const [fontsLoaded] = useFonts({ Nunito_400Regular, Nunito_700Bold });
@@ -17,7 +15,7 @@ export default function App() {
         translucent
         backgroundColor="transparent"
       />
-      {fontsLoaded ? <NewFood /> : <Loading />}
+      {fontsLoaded ? <Routes /> : <Loading />}
     </ThemeProvider>
   );
 }

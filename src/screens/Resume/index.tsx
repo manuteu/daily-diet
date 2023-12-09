@@ -3,14 +3,17 @@ import { ArrowContainer, Card, CardSubtitle, CardTitle, Content, ContentContaine
 import { Subtitle, Title } from '@components/PercentCard/styles'
 import ArrowSvg from '@icons/Arrow'
 import { useTheme } from 'styled-components/native'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Resume() {
-  const {COLORS} = useTheme()
+  const { COLORS } = useTheme()
+  const { navigate } = useNavigation()
+
   return (
     <>
       <PercentHeader type='INSIDE'>
-        <ArrowContainer>
-          <ArrowSvg color={COLORS.GREEN_DARK}/>
+        <ArrowContainer onPress={() => navigate('home')}>
+          <ArrowSvg color={COLORS.GREEN_DARK} />
         </ArrowContainer>
         <Title>90,86%</Title>
         <Subtitle>das refeições dentro da dieta</Subtitle>

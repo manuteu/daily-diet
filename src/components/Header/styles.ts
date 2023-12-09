@@ -1,8 +1,12 @@
 import styled, { css } from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
 
-export const Container = styled.View`
-  background-color: ${({ theme }) => theme.COLORS.GRAY_600};
+type Props = {
+  bgColor: string;
+};
+
+export const Container = styled.View<Props>`
+  background-color: ${({ bgColor }) => bgColor};
   align-items: center;
   flex-direction: row;
   height: 132px;
@@ -26,6 +30,6 @@ export const Title = styled.Text`
   `}
 `;
 
-export const CheatBox =  styled.View`
+export const CheatBox = styled.View`
   width: 36px;
-`
+`;

@@ -1,18 +1,20 @@
 import React from 'react'
 import { TypeColorProps, ButtonVariantProps, Container, Content, Text } from './styles'
-import Plus from '@icons/Plus'
+import { TouchableOpacityProps } from 'react-native'
 
-interface Props {
+type Props = {
   variant: ButtonVariantProps
-  type: TypeColorProps
-}
+  type: TypeColorProps;
+  title: string;
+  icon?: React.ReactNode
+} & TouchableOpacityProps
 
-export default function Button({ variant, type, ...rest }: Props) {
+export default function Button({ variant, type, title, icon, ...rest }: Props) {
   return (
     <Container {...rest} type={type} variant={variant}>
       <Content>
-        <Plus />
-        <Text variant={variant}>Nova refeição</Text>
+        {icon}
+        <Text variant={variant}>{title}</Text>
       </Content>
     </Container>
   )

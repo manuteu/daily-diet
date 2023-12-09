@@ -5,6 +5,8 @@ import Logo from '@icons/Logo'
 import AvatarPng from '@assets/avatar.png'
 import Button from '@components/Button'
 import DailyFoods, { DailyFoodsProps } from '@components/DailyFoods'
+import Plus from '@icons/Plus'
+import { useNavigation } from '@react-navigation/native'
 
 export default function Home() {
   const [data, setData] = useState<DailyFoodsProps[]>([
@@ -37,6 +39,7 @@ export default function Home() {
       ]
     }
   ])
+  const { navigate } = useNavigation()
   return (
     <Container>
       <Header>
@@ -45,10 +48,10 @@ export default function Home() {
       </Header>
       <PercentCard />
       <Text>Refeições</Text>
-      <Button type='FULL' variant='contained' />
+      <Button title='Nova Refeição' type='FULL' variant='contained' icon={<Plus />} onPress={() => navigate('newFood')} />
       <ScrollCards showsVerticalScrollIndicator={false} fadingEdgeLength={300}>
         {data.map((data: DailyFoodsProps, index) => (
-          <DailyFoods key={index} {...data} />
+          <DailyFoods key={index} {...data} onPress={() => navigate('foodDetail')} />
         ))}
       </ScrollCards>
     </Container>

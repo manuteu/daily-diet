@@ -25,7 +25,7 @@ export const ArrowContainer = styled(TouchableOpacity)`
 
 export const ContentContainer = styled.View`
   flex: 1;
-  background-color: white;
+  background-color:  ${({ theme }) => theme.COLORS.GRAY_700};
   border-top-left-radius: 20px;
   border-top-right-radius: 20px;
   margin-top: -24px;
