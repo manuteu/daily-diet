@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { FOOD_COLLECTION } from '@storage/storageConfig';
-import { getAllFoods } from './getAllFods';
+import { getAllFoods } from './getAllFoods';
 import { Alert } from 'react-native';
 
 export interface FoodDetailProps {

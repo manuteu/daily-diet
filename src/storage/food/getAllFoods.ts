@@ -9,8 +9,8 @@ export async function getAllFoods() {
     const foods: FoodProps[] = storage ? JSON.parse(storage) : [];
 
     const toDate = (dataString: any) => {
-      const partes = dataString.split(/[\.\-\/]/);
-      const formatoAnoPrimeiro = partes[0].length === 4;
+      const partes = dataString?.split(/[\.\-\/]/);
+      const formatoAnoPrimeiro = partes[0]?.length === 4;
 
       if (formatoAnoPrimeiro) {
         return new Date(partes[0], partes[1] - 1, partes[2]);
@@ -21,10 +21,10 @@ export async function getAllFoods() {
 
     // Função de comparação para ordenar as datas do dia mais recente para o mais antigo
     const compareDates = (a: FoodProps, b: FoodProps) => {
-      const dataA = toDate(a.date);
-      const dataB = toDate(b.date);
+      const dataA = toDate(a?.date);
+      const dataB = toDate(b?.date);
 
-      return dataB.valueOf() - dataA.valueOf();
+      return dataB?.valueOf() - dataA?.valueOf();
     };
 
     const sortedFoods = foods.sort(compareDates);

@@ -7,7 +7,7 @@ import Button from '@components/Button'
 import DailyFoods from '@components/DailyFoods'
 import Plus from '@icons/Plus'
 import { useFocusEffect, useNavigation } from '@react-navigation/native'
-import { getAllFoods } from '@storage/food/getAllFods'
+import { getAllFoods } from '@storage/food/getAllFoods'
 import { FoodProps } from '@storage/food/createFood'
 import { Alert, FlatList } from 'react-native'
 import Loading from '@components/Loading'
@@ -51,8 +51,15 @@ export default function Home() {
           data={foods}
           keyExtractor={(item) => item.date}
           renderItem={({ item, index }) => (
-            <DailyFoods key={index} {...item} onPress={() => navigate('foodDetail')} />
+            <DailyFoods key={index} {...item} />
           )}
+          ListEmptyComponent={
+            <Text
+              style={{ textAlign: 'center', marginTop: 24 }}
+            >
+              Você não possui refeições cadastradas
+            </Text>
+          }
           showsVerticalScrollIndicator={false}
           fadingEdgeLength={300}
           style={{ marginBottom: 24 }}

@@ -1,3 +1,5 @@
+import { FoodProps } from '@storage/food/createFood';
+
 export declare global {
   namespace ReactNavigation {
     interface RootParamList {
@@ -6,7 +8,9 @@ export declare global {
       resume: undefined;
       positiveFeedback: undefined;
       negativeFeedback: undefined;
-      foodDetail: undefined;
+      foodDetail: {
+        food: {};
+      };
     }
   }
 }
