@@ -1,15 +1,15 @@
 import { View, Text } from 'react-native'
 import React from 'react'
 import { Card, Divider, Food, Hour, Dot } from './styles'
-import { Foods } from '@components/DailyFoods'
+import { FoodDetailProps } from '@storage/food/createFood'
 
-export default function FoodCard({ hour, name, type, ...rest }: Foods) {
+export default function FoodCard({ hour, name, isDiet, ...rest }: FoodDetailProps) {
   return (
     <Card {...rest}>
       <Hour>{hour}</Hour>
       <Divider />
       <Food>{name}</Food>
-      <Dot type={type} />
+      <Dot isDiet={isDiet} />
     </Card>
   )
 }

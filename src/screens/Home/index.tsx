@@ -1,45 +1,40 @@
-import React, { useState } from 'react'
-import { Avatar, Container, Header, ScrollCards, Text } from './styles'
+import React, { useCallback, useState } from 'react'
+import { Avatar, Container, Header, Text } from './styles'
 import PercentCard from '@components/PercentCard'
 import Logo from '@icons/Logo'
 import AvatarPng from '@assets/avatar.png'
 import Button from '@components/Button'
-import DailyFoods, { DailyFoodsProps } from '@components/DailyFoods'
+import DailyFoods from '@components/DailyFoods'
 import Plus from '@icons/Plus'
-import { useNavigation } from '@react-navigation/native'
+import { useFocusEffect, useNavigation } from '@react-navigation/native'
+import { getAllFoods } from '@storage/food/getAllFods'
+import { FoodProps } from '@storage/food/createFood'
+import { Alert, FlatList } from 'react-native'
+import Loading from '@components/Loading'
 
 export default function Home() {
-  const [data, setData] = useState<DailyFoodsProps[]>([
-    {
-      date: '12.08.22',
-      foods: [{
-        name: 'X-tudo',
-        hour: '20:00',
-        type: 'OUT',
-      },
-      {
-        name: 'Whey protein com leite',
-        hour: '16:00',
-        type: 'IN',
-      }]
-    },
-    {
-      date: '11.08.22',
-      foods: [
-        {
-          name: 'Salada cesar com frango',
-          hour: '12:30',
-          type: 'IN',
-        },
-        {
-          name: 'Vitamina de Banana',
-          hour: '09:30',
-          type: 'IN',
-        },
-      ]
-    }
-  ])
+  const [isLoading, setIsLoading] = useState(true)
+  const [foods, setFoods] = useState<FoodProps[]>([])
   const { navigate } = useNavigation()
+
+  const fetchFoods = async () => {
+    setIsLoading(true)
+    try {
+      const data = await getAllFoods()
+      setFoods(data)
+
+    } catch (error) {
+      console.error(error);
+      Alert.alert('Turmas', 'Não foi possível carregar as turmas')
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  useFocusEffect(useCallback(() => {
+    fetchFoods()
+  }, []));
+
   return (
     <Container>
       <Header>
@@ -49,11 +44,20 @@ export default function Home() {
       <PercentCard />
       <Text>Refeições</Text>
       <Button title='Nova Refeição' type='FULL' variant='contained' icon={<Plus />} onPress={() => navigate('newFood')} />
-      <ScrollCards showsVerticalScrollIndicator={false} fadingEdgeLength={300}>
-        {data.map((data: DailyFoodsProps, index) => (
-          <DailyFoods key={index} {...data} onPress={() => navigate('foodDetail')} />
-        ))}
-      </ScrollCards>
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <FlatList
+          data={foods}
+          keyExtractor={(item) => item.date}
+          renderItem={({ item, index }) => (
+            <DailyFoods key={index} {...item} onPress={() => navigate('foodDetail')} />
+          )}
+          showsVerticalScrollIndicator={false}
+          fadingEdgeLength={300}
+          style={{ marginBottom: 24 }}
+        />
+      )}
     </Container>
   )
 }

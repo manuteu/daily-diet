@@ -22,5 +22,3 @@ export const Text = styled.Text`
     color: ${theme.COLORS.GRAY_100};
   `}
 `;
-
-export const ScrollCards = styled.ScrollView``

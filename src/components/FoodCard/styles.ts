@@ -34,13 +34,13 @@ export const Food = styled.Text`
   `}
 `;
 type DotProp = {
-  type: 'IN' | 'OUT';
+  isDiet: boolean
 };
 
 export const Dot = styled(View)<DotProp>`
   width: 14px;
   height: 14px;
   border-radius: 10px;
-  background-color: ${({ theme, type }) =>
-    type === 'IN' ? theme.COLORS.GREEN_LIGHT : theme.COLORS.RED_LIGHT};
+  background-color: ${({ theme, isDiet }) =>
+    isDiet ? theme.COLORS.GREEN_MID : theme.COLORS.RED_MID};
 `;

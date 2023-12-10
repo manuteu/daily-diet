@@ -7,6 +7,8 @@ import InputContainer from '@components/Input'
 import Button from '@components/Button'
 import { Row } from '@screens/Resume/styles'
 import { mask } from '@utils/index'
+import { CreateFood, createFood } from '@storage/food/createFood'
+import { Alert } from 'react-native'
 
 export default function NewFood() {
   const [isDiet, setIsDiet] = useState(true)
@@ -25,6 +27,27 @@ export default function NewFood() {
       [key]: value,
     }));
   };
+
+  const handleCreateFood = async () => {
+    if (Object.values(inputValues).some(value => value === '')) {
+      Alert.alert('Cuidado', 'Preencha todos os campos')
+      return
+    }
+    const newData: CreateFood = {
+      date: inputValues.date,
+      hour: inputValues.hour,
+      name: inputValues.name,
+      description: inputValues.description,
+      isDiet: isDiet
+    }
+
+    try {
+      await createFood(newData)
+      isDiet ? navigate('positiveFeedback') : navigate('negativeFeedback');
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   return (
     <Container>
@@ -80,7 +103,7 @@ export default function NewFood() {
 
       </Form>
       <ButtonContainer>
-        <Button variant='contained' type='FULL' title='Cadastrar Refeição' onPress={() => navigate('negativeFeedback')} />
+        <Button variant='contained' type='FULL' title='Cadastrar Refeição' onPress={handleCreateFood} />
       </ButtonContainer>
     </Container>
   )
