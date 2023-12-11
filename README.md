@@ -1,5 +1,5 @@
 # Daily Diet
-## Ignite react native - challenger 2
+## Ignite react native - challenge 2
 Daily Diet é uma aplicação mobile para controle da sua dieta. 
 Nele você pode registrar suas refeições e acompanhar como está seu progresso.
 
