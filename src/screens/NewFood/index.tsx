@@ -1,5 +1,5 @@
-import React, { useState } from 'react'
-import { useNavigation } from '@react-navigation/native'
+import React, { useState, useCallback } from 'react'
+import { useFocusEffect, useNavigation, useRoute } from '@react-navigation/native'
 import { useTheme } from 'styled-components/native'
 import { ButtonContainer, Container, Dot, Form, Label, RadioBox, RadioText } from './styles'
 import Header from '@components/Header'
@@ -9,6 +9,17 @@ import { Row } from '@screens/Resume/styles'
 import { mask } from '@utils/index'
 import { CreateFood, createFood } from '@storage/food/createFood'
 import { Alert } from 'react-native'
+import { UpdateFood, updateFood } from '@storage/food/updateFood'
+
+type RouteParams = {
+  food: {
+    name: string;
+    hour: string;
+    isDiets: boolean;
+    date: string;
+    description: string;
+  };
+}
 
 export default function NewFood() {
   const [isDiet, setIsDiet] = useState(true)
@@ -20,6 +31,8 @@ export default function NewFood() {
     date: '',
     hour: '',
   });
+  const { params } = useRoute()
+  const { food: { date, description, hour, isDiets, name } } = params as RouteParams
 
   const handleInputChange = (key: keyof typeof inputValues, value: string) => {
     setInputValues((prevValues) => ({
@@ -49,16 +62,57 @@ export default function NewFood() {
     }
   }
 
+  const handleUpdateFood = async () => {
+    if (Object.values(inputValues).some(value => value === '')) {
+      Alert.alert('Cuidado', 'Preencha todos os campos')
+      return
+    }
+    const newData: CreateFood = {
+      date: inputValues.date,
+      hour: inputValues.hour,
+      name: inputValues.name,
+      description: inputValues.description,
+      isDiet: isDiet
+    }
+
+    const oldData: UpdateFood = {
+      date: date,
+      hour: hour,
+      name: name,
+      description: description,
+      isDiet: isDiet
+    }
+
+    try {
+      await updateFood(newData, oldData)
+      navigate('foodDetail', { food: { ...inputValues, isDiet } })
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  useFocusEffect(useCallback(() => {
+    setInputValues({
+      date,
+      hour,
+      name,
+      description,
+    })
+    setIsDiet(isDiets)
+  }, []));
+
   return (
     <Container>
-      <Header title='Nova refeição' goBack={() => navigate('home')} />
+      <Header title={name ? 'Editar refeição' : 'Nova refeição'} goBack={() => !name ? navigate('home') : navigate('foodDetail', { food: { ...inputValues, isDiet } })} />
       <Form>
         <InputContainer
           label='Nome'
+          value={inputValues.name}
           onChangeText={(e) => handleInputChange('name', e)}
         />
         <InputContainer
           label='Descrição'
+          value={inputValues.description}
           maxLength={150}
           onChangeText={(e) => handleInputChange('description', e)}
           multiline
@@ -103,7 +157,7 @@ export default function NewFood() {
 
       </Form>
       <ButtonContainer>
-        <Button variant='contained' type='FULL' title='Cadastrar Refeição' onPress={handleCreateFood} />
+        <Button variant='contained' type='FULL' title={name ? 'Salvar alterações' : 'Cadastrar Refeição'} onPress={name ? handleUpdateFood : handleCreateFood} />
       </ButtonContainer>
     </Container>
   )

@@ -80,7 +80,6 @@ export async function createFood({
       await AsyncStorage.setItem(FOOD_COLLECTION, storage);
     }
 
-    // await AsyncStorage.removeItem(FOOD_COLLECTION);
   } catch (error) {
     throw error;
   }

@@ -47,7 +47,6 @@ export async function deleteFood({
 
     // Remove a refeição de um dia
     if (filteredDate[0].foodDetail.length > 1) {
-      console.log('oldgetFoods => ', getFoods);
       filteredDate.forEach(
         (food) =>
           (food.foodDetail = food.foodDetail.filter(

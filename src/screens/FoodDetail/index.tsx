@@ -54,8 +54,22 @@ export default function FoodDetail() {
         </Clip>
       </Content>
       <ButtonContainer>
-        <Button title='Editar refeição' type='FULL' variant='contained' icon={<Edit />} />
-        <Button title='Excluir refeição' type='FULL' variant='outlined' icon={<Trash />} onPress={() => setModalVisible(true)} />
+        <Button
+          title='Editar refeição'
+          type='FULL'
+          variant='contained'
+          icon={<Edit />}
+          onPress={() => navigate('newFood', {
+            food: { description, date, hour, isDiets: isDiet, name }
+          })}
+        />
+        <Button
+          title='Excluir refeição'
+          type='FULL'
+          variant='outlined'
+          icon={<Trash />}
+          onPress={() => setModalVisible(true)}
+        />
       </ButtonContainer>
       <ModalCustom visible={modalVisible} setVisibility={setModalVisible} onDelete={handleDelete} />
     </Container>

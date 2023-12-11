@@ -4,7 +4,9 @@ export declare global {
   namespace ReactNavigation {
     interface RootParamList {
       home: undefined;
-      newFood: undefined;
+      newFood: {
+        food: {};
+      };
       resume: undefined;
       positiveFeedback: undefined;
       negativeFeedback: undefined;

@@ -43,7 +43,7 @@ export default function Home() {
       </Header>
       <PercentCard />
       <Text>Refeições</Text>
-      <Button title='Nova Refeição' type='FULL' variant='contained' icon={<Plus />} onPress={() => navigate('newFood')} />
+      <Button title='Nova Refeição' type='FULL' variant='contained' icon={<Plus />} onPress={() => navigate('newFood', { food: {} })} />
       {isLoading ? (
         <Loading />
       ) : (
