@@ -3,39 +3,47 @@ import { ArrowContainer, Card, CardSubtitle, CardTitle, Content, ContentContaine
 import { Subtitle, Title } from '@components/PercentCard/styles'
 import ArrowSvg from '@icons/Arrow'
 import { useTheme } from 'styled-components/native'
-import { useNavigation } from '@react-navigation/native'
+import { useNavigation, useRoute } from '@react-navigation/native'
+import { FoodProps } from '@storage/food/createFood'
+import { calculateIsDiet, maxDietTrue, sumDietFalse, sumDietTrue, sumFoods } from '@utils/index'
+
+type RouteParams = {
+  food: FoodProps[]
+}
 
 export default function Resume() {
   const { COLORS } = useTheme()
   const { navigate } = useNavigation()
+  const { params } = useRoute()
+  const { food } = params as RouteParams
 
   return (
     <>
-      <PercentHeader type='INSIDE'>
+      <PercentHeader type={Number(calculateIsDiet(food)) > 50 ? 'INSIDE': 'OUTSIDE'}>
         <ArrowContainer onPress={() => navigate('home')}>
-          <ArrowSvg color={COLORS.GREEN_DARK} />
+          <ArrowSvg color={Number(calculateIsDiet(food)) > 50 ? COLORS.GREEN_DARK : COLORS.RED_DARK} />
         </ArrowContainer>
-        <Title>90,86%</Title>
+        <Title>{calculateIsDiet(food)}%</Title>
         <Subtitle>das refeições dentro da dieta</Subtitle>
       </PercentHeader>
       <ContentContainer>
         <ContentTitle>Estatísticas gerais</ContentTitle>
         <Content>
           <Card>
-            <CardTitle>22</CardTitle>
+            <CardTitle>{maxDietTrue(food)}</CardTitle>
             <CardSubtitle>melhor sequência de pratos dentro da dieta</CardSubtitle>
           </Card>
           <Card>
-            <CardTitle>109</CardTitle>
+            <CardTitle>{sumFoods(food)}</CardTitle>
             <CardSubtitle>refeições registradas</CardSubtitle>
           </Card>
           <Row>
             <Card style={{ width: '48%' }} type='INSIDE'>
-              <CardTitle>99</CardTitle>
+              <CardTitle>{sumDietTrue(food)}</CardTitle>
               <CardSubtitle>refeições dentro da dieta</CardSubtitle>
             </Card>
             <Card style={{ width: '48%' }} type='OUTSIDE'>
-              <CardTitle>10</CardTitle>
+              <CardTitle>{sumDietFalse(food)}</CardTitle>
               <CardSubtitle>refeições fora da dieta</CardSubtitle>
             </Card>
           </Row>

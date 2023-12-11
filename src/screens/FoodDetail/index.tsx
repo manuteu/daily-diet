@@ -39,7 +39,7 @@ export default function FoodDetail() {
 
   return (
     <Container>
-      <Header type="INSIDE" title='Refeição' goBack={() => navigate('home')} />
+      <Header type={isDiet ? "INSIDE" : "OUTSIDE"} title='Refeição' goBack={() => navigate('home')} />
       <Content>
         <View>
           <Title>{name}</Title>

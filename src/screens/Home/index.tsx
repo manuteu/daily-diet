@@ -11,6 +11,9 @@ import { getAllFoods } from '@storage/food/getAllFoods'
 import { FoodProps } from '@storage/food/createFood'
 import { Alert, FlatList } from 'react-native'
 import Loading from '@components/Loading'
+import { View } from 'react-native'
+import { calculateIsDiet } from '@utils/index'
+
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true)
@@ -36,12 +39,12 @@ export default function Home() {
   }, []));
 
   return (
-    <Container>
+    <View style={{ paddingHorizontal: 24, paddingTop: 40, flex: 1 }}>
       <Header>
         <Logo />
         <Avatar source={AvatarPng} />
       </Header>
-      <PercentCard />
+      <PercentCard food={foods} />
       <Text>Refeições</Text>
       <Button title='Nova Refeição' type='FULL' variant='contained' icon={<Plus />} onPress={() => navigate('newFood', { food: {} })} />
       {isLoading ? (
@@ -65,6 +68,6 @@ export default function Home() {
           style={{ marginBottom: 24 }}
         />
       )}
-    </Container>
+    </View>
   )
 }

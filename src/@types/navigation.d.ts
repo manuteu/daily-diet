@@ -7,7 +7,9 @@ export declare global {
       newFood: {
         food: {};
       };
-      resume: undefined;
+      resume: {
+        food: FoodProps[];
+      };
       positiveFeedback: undefined;
       negativeFeedback: undefined;
       foodDetail: {

@@ -1,6 +1,6 @@
-export type TypeMask =
-  'time'
-  | 'date'
+import { FoodProps } from '@storage/food/createFood';
+
+export type TypeMask = 'time' | 'date';
 
 export function mask(type: TypeMask, value: any) {
   switch (type) {
@@ -19,3 +19,77 @@ export function mask(type: TypeMask, value: any) {
       return '';
   }
 }
+
+export const calculateIsDiet = (data: FoodProps[]) => {
+  let totalComidas = 0;
+  let comidasDiet = 0;
+
+  data.forEach((entry) => {
+    entry.foodDetail.forEach((comida) => {
+      totalComidas++;
+      if (comida.isDiet) {
+        comidasDiet++;
+      }
+    });
+  });
+
+  const percent = (comidasDiet / totalComidas) * 100;
+  return percent === 100 ? percent : percent.toFixed(2);
+};
+
+export const maxDietTrue = (data: FoodProps[]) => {
+  let sequencias = 0;
+  let sequenciaAtual = 0;
+
+  data.forEach((entry) => {
+    entry.foodDetail.forEach((comida) => {
+      if (comida.isDiet) {
+        sequenciaAtual++;
+      } else {
+        sequenciaAtual = 0;
+      }
+
+      sequencias = Math.max(sequencias, sequenciaAtual);
+    });
+  });
+
+  return sequencias;
+};
+
+export const sumFoods = (data: FoodProps[]) => {
+  let maximoItens = 0;
+
+  data.forEach((entry) => {
+    maximoItens += entry.foodDetail.length;
+  });
+
+  return maximoItens;
+};
+
+export const sumDietTrue = (data: FoodProps[]) => {
+  let dietTrue = 0;
+
+  data.forEach((entry) => {
+    entry.foodDetail.forEach((comida) => {
+      if (comida.isDiet) {
+        dietTrue++;
+      }
+    });
+  });
+
+  return dietTrue;
+};
+
+export const sumDietFalse = (data: FoodProps[]) => {
+  let dietFalse = 0;
+
+  data.forEach((entry) => {
+    entry.foodDetail.forEach((comida) => {
+      if (!comida.isDiet) {
+        dietFalse++;
+      }
+    });
+  });
+
+  return dietFalse;
+};
