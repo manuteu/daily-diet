@@ -1,6 +1,7 @@
 # Daily Diet
 ## Ignite react native - challenger 2
-Projeto consiste em um to do, uma lista de tarefas. Podendo incluir tarefas, marca-las como concluídas e exclui-las.
+Daily Diet é uma aplicação mobile para controle da sua dieta. 
+Nele você pode registrar suas refeições e acompanhar como está seu progresso.
 
 ![image](https://github.com/manuteu/daily-diet/assets/74114950/b07e3c5c-a8ff-4995-ad39-88a2e18c443b)
 ![image](https://github.com/manuteu/daily-diet/assets/74114950/56ca521a-0780-4a5d-ad35-23806c713a08)
